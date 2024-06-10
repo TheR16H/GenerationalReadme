@@ -2,31 +2,35 @@
 const inquirer = require('inquirer');
 // TODO: Create an array of questions for user input
 const questions = [
-    { description: "describe what will be in this respiratory" },
-    { installation: "are there any special instructions to install this?" },
-    { usage: "how is the content in this repo meant to be used?" },
-    { contributions: "what are the contribution guidelines?" },
-    { tests: "how should tests be performed" },
-    { username: "what is your github username?" },
-    { email: "what is your email?" }
+    { name: 'description' , message: "what will this respiratory be about?" },
+    { name: 'installation' , message:"are there any special instructions to install pr run this?" },
+    { name: 'usage' , message: "how is the content in this repo meant to be used?" },
+    { name: 'contributions' , message:"what are the contribution guidelines?" },
+    { name: 'tests' , message:"how should tests be performed" },
+    { name: 'username' , message: "what is your github username?" },
+    { name: 'email', message: "what is your email?" }
 ];
+
+// function generateREADME
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
+// function writeToFile(fileName, data) {
     // finsih down below so the "data" part works
-    `## Description
-    ${description}
+    function generateREADME(data) {
+
+    return `## Description
+    ${data.description}
 
     ## installation
-    ${installation}
+    ${data.installation}
 
     ## Usage
-    ${usage}
+    ${data.usage}
 
     ## contributions
-    ${contributions}
+    ${data.contributions}
 
     ## tests
-    ${tests};`
+    ${data.tests}`;
 }
 
 function writeToFile(fileName, data) {
@@ -36,12 +40,19 @@ function writeToFile(fileName, data) {
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions) 
-    .then((answers) => writeToFile('README.md', generateREADME(answers)))
-    .then(() => console.log('read the readmee'))
-    .catch((err) => console.error(err));
+    .then((answers) =>{ 
+        const readmeContent = generateREADME(answers);
+        const fileName= 'README.md';
+        const content = writeToFile(fileName, readmeContent)
+        fs.writeFile(fileName, content, (err) => { 
+            if (err) {
+              console.error(err);
+              return;
 }
-
+ console.log('README CREATION WAS A SUCCESS!!');
+     });
+  });
+}
 // Function call to initialize app
 init();
-
 
