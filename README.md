@@ -23,7 +23,7 @@ N/A
 ## Installation
 <!-- To use this application first you will need to make sure you have <b>[Inquierer](https://www.npmjs.com/package/inquirer)</b> installed. visit the link provided or run the following command in your terminal.  
 ``` 
-npm install --save inquirer 
+npm i
 ``` -->
 ## Usage
 <!-- the purpose this application -->

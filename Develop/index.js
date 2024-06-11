@@ -56,3 +56,38 @@ function init() {
 // Function call to initialize app
 init();
 
+
+//  dear rashawn intergrate me soooon vv
+// const inquirer = require('inquirer');
+
+// inquirer
+//   .prompt([
+//     {
+//       message: 'Press ENTER to continue...',
+//       name: 'enterKey'
+//     }
+//   ]);
+
+// const inquirer = require('inquirer');
+
+// inquirer
+//    .prompt([
+// {
+//     type: 'input',
+//     name: 'something1',
+//     message: 'Enter something:'
+// },
+// {
+//     type: 'input',
+//     name: 'something2',
+//     message: 'Enter something else:'
+// },
+// {
+//     type: 'input',
+//     name: 'something3',
+//     message: 'Enter a third thing for funsies:'
+// },
+// ]).then((answers) => {
+// console.log(answers);
+
+// });
