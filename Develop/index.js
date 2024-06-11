@@ -37,19 +37,41 @@ const questions = [
         type: 'input',
         name: 'Questions',
         message: 'Whats the link to your github so the user can contact you for support if needed?'
+    },
+    {
+        type: 'list',
+        name: 'license',
+        message: 'Please choose your License:',
+        choices: ['Apache License 2.0', 'MIT', 'GNU General Public License v2.0', 'Mozilla Public License Version 2.0']
     }
 ];
 
-// i'm telling the function to grab the questions & the answers, also to add a line break (/n) so it displays correctly
+// i'm telling the function to grab the questions & the answers, also to add a line break (/n) so it displays correctly and making the selected license a link!
 inquirer.prompt(questions)
     .then(answers => {
-        const formattedResponses = `# Name: ${answers.name}\n\n## Description:\n${answers.Description}\n\n## Installation:\n${answers.Installation}\n\n## Usage:\n${answers.Usage}\n\n## Contributions:\n${answers.Contributions}\n\n## Tests:\n${answers.tests}\n\n## Questions:\n${answers.Questions}\n\n`;
+        let licenseLink = '';
+        switch (answers.license) {
+            case 'Apache License 2.0':
+                licenseLink = '[Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/)';
+                break;
+            case 'MIT':
+                licenseLink = '[MIT](https://choosealicense.com/licenses/mit/)';
+                break;
+            case 'GNU General Public License v2.0':
+                licenseLink = '[GNU General Public License v2.0](https://choosealicense.com/licenses/gpl-2.0/)';
+                break;
+            case 'Mozilla Public License Version 2.0':
+                licenseLink = '[Mozilla Public License Version 2.0](https://choosealicense.com/licenses/mpl-2.0/)';
+                break;
+            default:
+                licenseLink = 'License not specified';
+        }
 
-        // this will append the responses to a md file (README)
+        let formattedResponses = `# ${answers.name}\n\n## Table of Contents\n- [Description](#description)\n- [Installation](#installation)\n- [Usage](#usage)\n- [Contributions](#contributions)\n- [Tests](#tests)\n- [Questions](#questions)\n- [License](#license)\n\n## Description\n${answers.Description}\n\n## Installation\n${answers.Installation}\n\n## Usage\n${answers.Usage}\n\n## Contributions\n${answers.Contributions}\n\n## Tests\n${answers.tests}\n\n## Questions\n${answers.Questions}\n## License\n${licenseLink}\n\n`;
+
+        // Append the clickable link to the formattedResponses
         fs.appendFile('README.md', formattedResponses, (err) => {
             if (err) throw err;
             console.log('README CREATION WAS A SUCCESS!!');
         });
     });
-
-    
