@@ -121,3 +121,11 @@ You are required to submit the following for review:
 ---
 
 © 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+
+
+ description,
+  installation instructions, 
+  usage information, 
+  contribution guidelines, and 
+  test instructions
+    questions for contact

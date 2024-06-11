@@ -1,93 +1,55 @@
-// TODO: Include packages needed for this application
+// required packages
 const inquirer = require('inquirer');
-// TODO: Create an array of questions for user input
+const fs = require('fs');
+// these are the questions that will be asked to the user
 const questions = [
-    { name: 'description' , message: "what will this respiratory be about?" },
-    { name: 'installation' , message:"are there any special instructions to install pr run this?" },
-    { name: 'usage' , message: "how is the content in this repo meant to be used?" },
-    { name: 'contributions' , message:"what are the contribution guidelines?" },
-    { name: 'tests' , message:"how should tests be performed" },
-    { name: 'username' , message: "what is your github username?" },
-    { name: 'email', message: "what is your email?" }
+    {
+        type: 'input',
+        name: 'name',
+        message: 'What is the name of your repo?'
+    },
+    {
+        type: 'input',
+        name: 'Description',
+        message: 'how would you describe the content in this Repo?'
+    },
+    {
+        type: 'input',
+        name: 'Installation',
+        message: 'Do any packages or the repo itself need to be installed to used? if so what are the specific instructions to do so?'
+    },
+    {
+        type: 'input',
+        name: 'Usage',
+        message: 'How was this application intended to be used?'
+    },
+    {
+        type: 'input',
+        name: 'Contributions',
+        message: 'Will any contributions be accepted?'
+    },
+    {
+        type: 'input',
+        name: 'tests',
+        message: 'How should tests be performed ?'
+    },
+    {
+        type: 'input',
+        name: 'Questions',
+        message: 'Whats the link to your github so the user can contact you for support if needed?'
+    }
 ];
 
-// function generateREADME
-// TODO: Create a function to write README file
-// function writeToFile(fileName, data) {
-    // finsih down below so the "data" part works
-    function generateREADME(data) {
+// i'm telling the function to grab the questions & the answers, also to add a line break (/n) so it displays correctly
+inquirer.prompt(questions)
+    .then(answers => {
+        const formattedResponses = `# Name: ${answers.name}\n\n## Description:\n${answers.Description}\n\n## Installation:\n${answers.Installation}\n\n## Usage:\n${answers.Usage}\n\n## Contributions:\n${answers.Contributions}\n\n## Tests:\n${answers.tests}\n\n## Questions:\n${answers.Questions}\n\n`;
 
-    return `## Description
-    ${data.description}
+        // this will append the responses to a md file (README)
+        fs.appendFile('README.md', formattedResponses, (err) => {
+            if (err) throw err;
+            console.log('README CREATION WAS A SUCCESS!!');
+        });
+    });
 
-    ## installation
-    ${data.installation}
-
-    ## Usage
-    ${data.usage}
-
-    ## contributions
-    ${data.contributions}
-
-    ## tests
-    ${data.tests}`;
-}
-
-function writeToFile(fileName, data) {
-    return `# ${fileName}\n${data}`;
-}
-
-// TODO: Create a function to initialize app
-function init() {
-    inquirer.prompt(questions) 
-    .then((answers) =>{ 
-        const readmeContent = generateREADME(answers);
-        const fileName= 'README.md';
-        const content = writeToFile(fileName, readmeContent)
-        fs.writeFile(fileName, content, (err) => { 
-            if (err) {
-              console.error(err);
-              return;
-}
- console.log('README CREATION WAS A SUCCESS!!');
-     });
-  });
-}
-// Function call to initialize app
-init();
-
-
-//  dear rashawn intergrate me soooon vv
-// const inquirer = require('inquirer');
-
-// inquirer
-//   .prompt([
-//     {
-//       message: 'Press ENTER to continue...',
-//       name: 'enterKey'
-//     }
-//   ]);
-
-// const inquirer = require('inquirer');
-
-// inquirer
-//    .prompt([
-// {
-//     type: 'input',
-//     name: 'something1',
-//     message: 'Enter something:'
-// },
-// {
-//     type: 'input',
-//     name: 'something2',
-//     message: 'Enter something else:'
-// },
-// {
-//     type: 'input',
-//     name: 'something3',
-//     message: 'Enter a third thing for funsies:'
-// },
-// ]).then((answers) => {
-// console.log(answers);
-
-// });
+    
